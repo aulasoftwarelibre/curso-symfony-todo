@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="ui buttons">
+        <button class="ui primary labeled icon button"><i class="save icon"></i> {{ button_label|default('Guardar') }}</button>
+        <a class="ui secondary labeled icon button" href="{{ path('task_index') }}"><i class="left arrow icon"></i> Volver</a>
+    </div>
+{{ form_end(form) }}

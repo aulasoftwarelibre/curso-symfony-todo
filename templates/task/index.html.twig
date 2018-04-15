@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de tareas{% endblock %}
+
+{% block body %}
+    <h1 class="ui header">Lista de tareas</h1>
+
+    <table class="ui selectable table">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Hecho</th>
+                <th>Fecha creación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.description }}</td>
+                <td>{{ task.isDone ? 'Sí' : 'No' }}</td>
+                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="ui buttons">
+                        <a class="ui icon button" href="{{ path('task_show', {'id': task.id}) }}"><i class="eye icon"></i></a>
+                        <a class="ui icon button" href="{{ path('task_edit', {'id': task.id}) }}"><i class="pencil icon"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No hay tareas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="ui primary labeled icon button" href="{{ path('task_new') }}"><i class="plus icon"></i> Crear nueva</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+        {% block container %}
+            <div class="ui fixed inverted menu">
+                <div class="ui container">
+                    <a href="{{ path('homepage') }}" class="header item">
+                        TODO
+                    </a>
+                    <a href="{{ path('homepage') }}" class="item">Inicio</a>
+                    <div class="right menu">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <div class="item">
+                            <a href="{{ path('logout') }}" class="ui inverted button">Cerrar sesión</a>
+                        </div>
+                        {% else %}
+                        <div class="item">
+                            <a href="{{ path('login') }}" class="ui inverted button">Iniciar sesión</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui main container">
+                {# you can read and display just one flash message type... #}
+                {% for label, messages in app.flashes %}
+                    <div class="ui {{ label }} message">
+                        <ul class="list">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+                {% block body %}{% endblock %}
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

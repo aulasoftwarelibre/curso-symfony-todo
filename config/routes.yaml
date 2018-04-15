@@ -1,0 +1,9 @@
+homepage:
+    path: /
+    controller: FrameworkBundle:Redirect:redirect
+    defaults:
+        route: task_index
+        permanent: true
+
+logout:
+    path: /logout
